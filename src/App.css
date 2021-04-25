@@ -18,3 +18,7 @@ li {
 input[type="checkbox"] {
   margin: 0 6px 0 0
 }
+
+.done-todo {
+  text-decoration: line-through;
+}
