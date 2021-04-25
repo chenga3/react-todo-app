@@ -90,17 +90,23 @@ const Todos = () => {
 
   return (
     <div>
-      <h1>Add Todo</h1>
-      <form onSubmit={handleSubmit}>
-        <input value={input} onChange={handleChange} />
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-      <h1 id="todo-header">Todo List</h1>
-      <Checklist todos={todos} onCheck={handleChecked} />
-      <button type="button" onClick={handleDeleteDone}>
-        Delete Done Todos
-      </button>
+      <div>
+        <h1 className="text-3xl">Add Todo</h1>
+        <form onSubmit={handleSubmit}>
+          <input className="border-2" value={input} onChange={handleChange} />
+          <br />
+          <button className="border-2" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
+      <div>
+        <h1 className="text-3xl">Todo List</h1>
+        <Checklist todos={todos} onCheck={handleChecked} />
+        <button className="border-2" type="button" onClick={handleDeleteDone}>
+          Delete Done Todos
+        </button>
+      </div>
     </div>
   );
 };
