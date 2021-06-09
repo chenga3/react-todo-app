@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import logo from "../images/logo.jpg";
 
@@ -25,7 +26,9 @@ interface NavlinkProps {
 }
 
 const Navlink: React.FC<NavlinkProps> = ({ text }: NavlinkProps) => (
-  <span className="p-2">{text}</span>
+  <Link className="p-2" to="/todos">
+    {text}
+  </Link>
 );
 
 export default Navbar;

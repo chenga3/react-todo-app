@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import Todos from "./pages/todos";
 import Navbar from "./components/navbar";
 
@@ -6,7 +7,11 @@ const App: React.FC = () => {
   return (
     <div className="p-4">
       <Navbar />
-      <Todos />
+      <Switch>
+        <Route path="/todos">
+          <Todos />
+        </Route>
+      </Switch>
     </div>
   );
 };
