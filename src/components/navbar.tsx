@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 import logo from "../images/logo.jpg";
 
@@ -11,11 +11,11 @@ const Navbar: React.FC = () => {
         <span className="text-2xl">Producktivity</span>
       </div>
       <div className="divide-x-2">
-        <Navlink text="Dashboard" />
-        <Navlink text="Todos" />
-        <Navlink text="Calendar" />
-        <Navlink text="Notes" />
-        <Navlink text="Pomodoro" />
+        <Navlink text="Dashboard" route="/" />
+        <Navlink text="Todos" route="/todos" />
+        <Navlink text="Calendar" route="/" />
+        <Navlink text="Notes" route="/" />
+        <Navlink text="Pomodoro" route="/pomodoro" />
       </div>
     </div>
   );
@@ -23,10 +23,11 @@ const Navbar: React.FC = () => {
 
 interface NavlinkProps {
   text: string;
+  route: string;
 }
 
-const Navlink: React.FC<NavlinkProps> = ({ text }: NavlinkProps) => (
-  <Link className="p-2" to="/todos">
+const Navlink: React.FC<NavlinkProps> = ({ text, route }: NavlinkProps) => (
+  <Link className="p-2" to={route}>
     {text}
   </Link>
 );
