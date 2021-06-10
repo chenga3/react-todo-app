@@ -1,7 +1,12 @@
 import React from "react";
 
-const BreakController: React.FC = () => {
-  return <div>BreakController</div>;
+interface PropsTypes {
+  breakTime: number;
+  setBreakTime: (breakTime: number) => void;
+}
+
+const BreakController: React.FC<PropsTypes> = ({ breakTime, setBreakTime }) => {
+  return <div>{breakTime}</div>;
 };
 
 export default BreakController;

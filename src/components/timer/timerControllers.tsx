@@ -2,11 +2,23 @@ import React from "react";
 import WorkController from "./WorkController";
 import BreakController from "./BreakController";
 
-const TimerController: React.FC = () => {
+interface PropTypes {
+  workTime: number;
+  breakTime: number;
+  setWorkTime: (workTime: number) => void;
+  setBreakTime: (breakTime: number) => void;
+}
+
+const TimerController: React.FC<PropTypes> = ({
+  workTime,
+  breakTime,
+  setWorkTime,
+  setBreakTime,
+}) => {
   return (
     <div>
-      <WorkController />
-      <BreakController />
+      <WorkController workTime={workTime} setWorkTime={setWorkTime} />
+      <BreakController breakTime={breakTime} setBreakTime={setBreakTime} />
     </div>
   );
 };

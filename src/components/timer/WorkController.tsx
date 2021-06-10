@@ -1,7 +1,12 @@
 import React from "react";
 
-const WorkController: React.FC = () => {
-  return <div>WorkController</div>;
+interface PropsTypes {
+  workTime: number;
+  setWorkTime: (workTime: number) => void;
+}
+
+const WorkController: React.FC<PropsTypes> = ({ workTime, setWorkTime }) => {
+  return <div>{workTime}</div>;
 };
 
 export default WorkController;
