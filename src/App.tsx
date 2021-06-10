@@ -8,10 +8,10 @@ import Pomodoro from "./pages/pomodoro";
 import Navbar from "./components/navbar";
 
 const App: React.FC = () => {
-  const [cycle, setCycle] = useState("Off");
-  const [workTime, setWorkTime] = useState(25);
-  const [breakTime, setBreakTime] = useState(5);
-  const [sound, setSound] = useState(true);
+  const [cycle, setCycle] = useState<string>("Off");
+  const [workTime, setWorkTime] = useState<number>(25);
+  const [breakTime, setBreakTime] = useState<number>(5);
+  const [sound, setSound] = useState<boolean>(true);
 
   const timer: Timer = {
     cycle: cycle,
