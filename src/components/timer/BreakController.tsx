@@ -6,7 +6,23 @@ interface PropsTypes {
 }
 
 const BreakController: React.FC<PropsTypes> = ({ breakTime, setBreakTime }) => {
-  return <div>{breakTime}</div>;
+  const decrementBreakTime = () => {
+    if (breakTime > 0) {
+      setBreakTime(breakTime - 1);
+    }
+  };
+
+  const incrementBreakTime = () => {
+    setBreakTime(breakTime + 1);
+  };
+
+  return (
+    <div className="flex flex-row">
+      <div onClick={decrementBreakTime}>&lt;</div>
+      <div>{breakTime}</div>
+      <div onClick={incrementBreakTime}>&gt;</div>
+    </div>
+  );
 };
 
 export default BreakController;
