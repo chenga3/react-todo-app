@@ -5,8 +5,8 @@ export const TimerContext = React.createContext({
   workTime: 25,
   breakTime: 5,
   sound: true,
-  setCycle: () => {},
-  setWorkTime: () => {},
-  setBreakTime: () => {},
-  setSound: () => {},
+  setCycle: (cycle) => {},
+  setWorkTime: (workTime) => {},
+  setBreakTime: (breakTime) => {},
+  setSound: (sound) => {},
 });
