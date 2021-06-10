@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import { TimerContext } from "./contexts/timer-context";
+import { Timer } from "./types";
 import Todos from "./pages/todos";
 import Pomodoro from "./pages/pomodoro";
 import Navbar from "./components/navbar";
@@ -12,7 +13,7 @@ const App: React.FC = () => {
   const [breakTime, setBreakTime] = useState(5);
   const [sound, setSound] = useState(true);
 
-  const timer = {
+  const timer: Timer = {
     cycle: cycle,
     workTime: workTime,
     breakTime: breakTime,
