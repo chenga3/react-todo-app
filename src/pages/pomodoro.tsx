@@ -30,6 +30,7 @@ const Pomodoro: React.FC = () => {
               setWorkTime={setWorkTime}
               setBreakTime={setBreakTime}
             />
+            <button>Start</button>
           </div>
         )}
       </TimerContext.Consumer>
