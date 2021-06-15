@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import UpController from "./UpController";
 import Digit from "./Digit";
@@ -11,11 +11,17 @@ interface PropsTypes {
 }
 
 const Controller: React.FC<PropsTypes> = ({ cycle, time, placeValue }) => {
+  const [digit, setDigit] = useState<number>(0);
+
+  const addTime = () => {};
+
+  const removeTime = () => {};
+
   return (
     <div>
-      <UpController />
-      <Digit />
-      <DownController />
+      <UpController addTime={addTime} />
+      <Digit digit={digit} />
+      <DownController removeTime={removeTime} />
     </div>
   );
 };

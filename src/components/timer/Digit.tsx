@@ -1,7 +1,11 @@
 import React from "react";
 
-const Digit: React.FC = () => {
-  return <div></div>;
+interface PropsTypes {
+  digit: number;
+}
+
+const Digit: React.FC<PropsTypes> = ({ digit }) => {
+  return <div>{digit}</div>;
 };
 
 export default Digit;
