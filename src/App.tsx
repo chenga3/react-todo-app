@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import { TimerContext } from "./contexts/timer-context";
@@ -29,6 +29,28 @@ const App: React.FC = () => {
     setBreakTime: setBreakTime,
     setSound: setSound,
   };
+
+  const countDown = () => {
+    if (hrsLeft === 0 && minsLeft === 0 && secsLeft === 0) {
+      // move to next state
+    } else if (minsLeft === 0 && secsLeft === 0) {
+      setHrsLeft(hrsLeft - 1);
+      setMinsLeft(59);
+      setSecsLeft(59);
+    } else if (secsLeft === 0) {
+      setMinsLeft(minsLeft - 1);
+      setSecsLeft(59);
+    } else {
+      setSecsLeft(secsLeft - 1);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      countDown();
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
 
   return (
     <TimerContext.Provider value={timer}>
