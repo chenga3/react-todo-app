@@ -9,12 +9,18 @@ import Navbar from "./components/navbar";
 
 const App: React.FC = () => {
   const [cycle, setCycle] = useState<string>("Off");
+  const [hrsLeft, setHrsLeft] = useState<number>(0);
+  const [minsLeft, setMinsLeft] = useState<number>(25);
+  const [secsLeft, setSecsLeft] = useState<number>(0);
   const [workTime, setWorkTime] = useState<number>(25);
   const [breakTime, setBreakTime] = useState<number>(5);
   const [sound, setSound] = useState<boolean>(true);
 
   const timer: Timer = {
     cycle: cycle,
+    hrsLeft: hrsLeft,
+    minsLeft: minsLeft,
+    secsLeft: secsLeft,
     workTime: workTime,
     breakTime: breakTime,
     sound: sound,

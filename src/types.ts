@@ -1,5 +1,8 @@
 export type Timer = {
   cycle: string;
+  hrsLeft: number;
+  minsLeft: number;
+  secsLeft: number;
   workTime: number;
   breakTime: number;
   sound: boolean;
