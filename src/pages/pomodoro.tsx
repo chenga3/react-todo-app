@@ -11,6 +11,9 @@ const Pomodoro: React.FC = () => {
       <TimerContext.Consumer>
         {({
           cycle,
+          hrsLeft,
+          minsLeft,
+          secsLeft,
           workTime,
           breakTime,
           sound,
@@ -20,7 +23,7 @@ const Pomodoro: React.FC = () => {
           setSound,
         }) => (
           <div>
-            <Timer />
+            <Timer hrsLeft={hrsLeft} minsLeft={minsLeft} secsLeft={secsLeft} />
             <TimerControllers
               workTime={workTime}
               breakTime={breakTime}
