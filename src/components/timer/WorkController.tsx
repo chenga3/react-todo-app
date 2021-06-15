@@ -6,7 +6,23 @@ interface PropsTypes {
 }
 
 const WorkController: React.FC<PropsTypes> = ({ workTime, setWorkTime }) => {
-  return <div>{workTime}</div>;
+  const decrementWorkTime = () => {
+    if (workTime > 0) {
+      setWorkTime(workTime - 1);
+    }
+  };
+
+  const incrementWorkTime = () => {
+    setWorkTime(workTime + 1);
+  };
+
+  return (
+    <div className="flex flex-row">
+      <div onClick={decrementWorkTime}>&lt;</div>
+      <div>{workTime}</div>
+      <div onClick={incrementWorkTime}>&gt;</div>
+    </div>
+  );
 };
 
 export default WorkController;
