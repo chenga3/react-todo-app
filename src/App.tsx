@@ -30,9 +30,19 @@ const App: React.FC = () => {
     setSound: setSound,
   };
 
+  /** Countdown for timer. Switches between 'work' and 'break' cycles. Doesn't countdown when timer is 'off'.*/
   const countDown = () => {
-    if (hrsLeft === 0 && minsLeft === 0 && secsLeft === 0) {
+    if (cycle === "Off") {
+      return;
+    } else if (hrsLeft === 0 && minsLeft === 0 && secsLeft === 0) {
       // move to next state
+      if (cycle === "Work") {
+        setCycle("Break");
+        resetTimer(breakTime);
+      } else if (cycle === "Break") {
+        setCycle("Work");
+        resetTimer(workTime);
+      }
     } else if (minsLeft === 0 && secsLeft === 0) {
       setHrsLeft(hrsLeft - 1);
       setMinsLeft(59);
@@ -43,6 +53,12 @@ const App: React.FC = () => {
     } else {
       setSecsLeft(secsLeft - 1);
     }
+  };
+
+  /** Resets the timer */
+  const resetTimer = (mins: number) => {
+    setHrsLeft(Math.floor(mins / 60));
+    setMinsLeft(mins % 60);
   };
 
   useEffect(() => {
