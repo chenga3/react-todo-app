@@ -68,7 +68,7 @@ const App: React.FC = () => {
 
   const pomodoroTimer: PomodoroTimer = {
     on: true,
-    cycle: "Work",
+    cycle: cycle,
     workTimer: workTimer,
     breakTimer: breakTimer,
     timeLeft: timeLeft,
@@ -93,7 +93,7 @@ const App: React.FC = () => {
   });
 
   return (
-    <TimerContext.Provider value={workTimer}>
+    <TimerContext.Provider value={pomodoroTimer}>
       <div className="p-4">
         <Navbar />
         <Switch>

@@ -2,12 +2,11 @@ import React from "react";
 
 export const TimerContext = React.createContext({
   on: false,
+  cycle: "Work",
+  workTimer: {},
+  breakTimer: {},
   timeLeft: [0, 0, 0],
-  startTime: [0, 0, 0],
-  sound: true,
-  setStartTime: (startTime) => {},
-  setSound: (sound) => {},
-  toggle: () => {},
-  countdown: () => {},
+  start: () => {},
+  pause: () => {},
   reset: () => {},
 });
