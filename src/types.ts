@@ -1,3 +1,14 @@
+export type PomodoroTimer = {
+  on: boolean;
+  cycle: string;
+  workTimer: Timer;
+  breakTimer: Timer;
+  timeLeft: Array<number>;
+  start: () => void;
+  pause: () => void;
+  reset: () => void;
+};
+
 export type Timer = {
   on: boolean;
   timeLeft: Array<number>;

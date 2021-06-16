@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import { TimerContext } from "./contexts/timer-context";
-import { Timer } from "./types";
+import { PomodoroTimer, Timer } from "./types";
 import Todos from "./pages/todos";
 import Pomodoro from "./pages/pomodoro";
 import Navbar from "./core/navbar";
@@ -63,6 +63,25 @@ const App: React.FC = () => {
     },
     reset: () => {
       setTimeLeft([...breakTimer.startTime]);
+    },
+  };
+
+  const pomodoroTimer: PomodoroTimer = {
+    on: true,
+    cycle: "Work",
+    workTimer: workTimer,
+    breakTimer: breakTimer,
+    timeLeft: timeLeft,
+    start: () => {
+      pomodoroTimer.on = true;
+    },
+    pause: () => {
+      pomodoroTimer.on = false;
+    },
+    reset: () => {
+      pomodoroTimer.on = false;
+      pomodoroTimer.cycle = "Work";
+      pomodoroTimer.timeLeft = workTimer.startTime;
     },
   };
 
