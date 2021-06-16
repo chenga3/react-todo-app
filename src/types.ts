@@ -1,15 +1,15 @@
 export type Timer = {
   cycle: string;
-  hrsLeft: number;
-  minsLeft: number;
-  secsLeft: number;
-  workTime: number;
-  breakTime: number;
+  timeLeft: Array<number>;
+  workTime: Array<number>;
+  breakTime: Array<number>;
   sound: boolean;
   setCycle: (cycle: string) => void;
-  setWorkTime: (workTime: number) => void;
-  setBreakTime: (breakTime: number) => void;
+  setWorkTime: (workTime: Array<number>) => void;
+  setBreakTime: (breakTime: Array<number>) => void;
   setSound: (sound: boolean) => void;
+  countdown: () => void;
+  reset: (time: Array<number>) => void;
 };
 
 export type Todo = {

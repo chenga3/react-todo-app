@@ -9,18 +9,14 @@ import Navbar from "./core/navbar";
 
 const App: React.FC = () => {
   const [cycle, setCycle] = useState<string>("Off");
-  const [hrsLeft, setHrsLeft] = useState<number>(0);
-  const [minsLeft, setMinsLeft] = useState<number>(25);
-  const [secsLeft, setSecsLeft] = useState<number>(0);
-  const [workTime, setWorkTime] = useState<number>(25);
-  const [breakTime, setBreakTime] = useState<number>(5);
+  const [timeLeft, setTimeLeft] = useState<Array<number>>([0, 25, 0]);
+  const [workTime, setWorkTime] = useState<Array<number>>([0, 25, 0]);
+  const [breakTime, setBreakTime] = useState<Array<number>>([0, 5, 0]);
   const [sound, setSound] = useState<boolean>(true);
 
-  const timer: Timer = {
+  const pomodoroTimer: Timer = {
     cycle: cycle,
-    hrsLeft: hrsLeft,
-    minsLeft: minsLeft,
-    secsLeft: secsLeft,
+    timeLeft: timeLeft,
     workTime: workTime,
     breakTime: breakTime,
     sound: sound,
@@ -28,48 +24,40 @@ const App: React.FC = () => {
     setWorkTime: setWorkTime,
     setBreakTime: setBreakTime,
     setSound: setSound,
-  };
-
-  /** Countdown for timer. Switches between 'work' and 'break' cycles. Doesn't countdown when timer is 'off'.*/
-  const countDown = () => {
-    if (cycle === "Off") {
-      return;
-    } else if (hrsLeft === 0 && minsLeft === 0 && secsLeft === 0) {
-      // move to next state
-      if (cycle === "Work") {
-        setCycle("Break");
-        resetTimer(breakTime);
-      } else if (cycle === "Break") {
-        setCycle("Work");
-        resetTimer(workTime);
+    countdown: () => {
+      if (cycle === "Off") {
+        return;
+      } else if (timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
+        // move to next state
+        if (cycle === "Work") {
+          setCycle("Break");
+          pomodoroTimer.reset(breakTime);
+        } else if (cycle === "Break") {
+          setCycle("Work");
+          pomodoroTimer.reset(workTime);
+        }
+      } else if (timeLeft[1] === 0 && timeLeft[2] === 0) {
+        setTimeLeft([timeLeft[0] - 1, 59, 59]);
+      } else if (timeLeft[2] === 0) {
+        setTimeLeft([timeLeft[0], timeLeft[1] - 1, 59]);
+      } else {
+        setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
       }
-    } else if (minsLeft === 0 && secsLeft === 0) {
-      setHrsLeft(hrsLeft - 1);
-      setMinsLeft(59);
-      setSecsLeft(59);
-    } else if (secsLeft === 0) {
-      setMinsLeft(minsLeft - 1);
-      setSecsLeft(59);
-    } else {
-      setSecsLeft(secsLeft - 1);
-    }
-  };
-
-  /** Resets the timer */
-  const resetTimer = (mins: number) => {
-    setHrsLeft(Math.floor(mins / 60));
-    setMinsLeft(mins % 60);
+    },
+    reset: (time: Array<number>) => {
+      setTimeLeft([...time]);
+    },
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      countDown();
+      pomodoroTimer.countdown();
     }, 1000);
     return () => clearTimeout(timer);
   });
 
   return (
-    <TimerContext.Provider value={timer}>
+    <TimerContext.Provider value={pomodoroTimer}>
       <div className="p-4">
         <Navbar />
         <Switch>
