@@ -9,14 +9,15 @@ import Navbar from "./core/navbar";
 
 const App: React.FC = () => {
   const [cycle, setCycle] = useState<string>("Off");
-  const [timeLeft, setTimeLeft] = useState<Array<number>>([0, 25, 0]);
+  const [workTimeLeft, setWorkTimeLeft] = useState<Array<number>>([0, 25, 0]);
+  const [breakTimeLeft, setBreakTimeLeft] = useState<Array<number>>([0, 5, 0]);
   const [workTime, setWorkTime] = useState<Array<number>>([0, 25, 0]);
   const [breakTime, setBreakTime] = useState<Array<number>>([0, 5, 0]);
   const [sound, setSound] = useState<boolean>(true);
 
   const workTimer: Timer = {
     on: false,
-    timeLeft: timeLeft,
+    timeLeft: workTimeLeft,
     startTime: workTime,
     sound: sound,
     setStartTime: setWorkTime,
@@ -25,24 +26,32 @@ const App: React.FC = () => {
       workTimer.on = !workTimer.on;
     },
     countdown: () => {
-      if (timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
+      if (
+        workTimeLeft[0] === 0 &&
+        workTimeLeft[1] === 0 &&
+        workTimeLeft[2] === 0
+      ) {
         workTimer.reset();
-      } else if (timeLeft[1] === 0 && timeLeft[2] === 0) {
-        setTimeLeft([timeLeft[0] - 1, 59, 59]);
-      } else if (timeLeft[2] === 0) {
-        setTimeLeft([timeLeft[0], timeLeft[1] - 1, 59]);
+      } else if (workTimeLeft[1] === 0 && workTimeLeft[2] === 0) {
+        setWorkTimeLeft([workTimeLeft[0] - 1, 59, 59]);
+      } else if (workTimeLeft[2] === 0) {
+        setWorkTimeLeft([workTimeLeft[0], workTimeLeft[1] - 1, 59]);
       } else {
-        setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
+        setWorkTimeLeft([
+          workTimeLeft[0],
+          workTimeLeft[1],
+          workTimeLeft[2] - 1,
+        ]);
       }
     },
     reset: () => {
-      setTimeLeft([...workTimer.startTime]);
+      setWorkTimeLeft([...workTimer.startTime]);
     },
   };
 
   const breakTimer: Timer = {
     on: false,
-    timeLeft: timeLeft,
+    timeLeft: breakTimeLeft,
     startTime: breakTime,
     sound: sound,
     setStartTime: setBreakTime,
@@ -51,18 +60,26 @@ const App: React.FC = () => {
       breakTimer.on = !breakTimer.on;
     },
     countdown: () => {
-      if (timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
+      if (
+        breakTimeLeft[0] === 0 &&
+        breakTimeLeft[1] === 0 &&
+        breakTimeLeft[2] === 0
+      ) {
         breakTimer.reset();
-      } else if (timeLeft[1] === 0 && timeLeft[2] === 0) {
-        setTimeLeft([timeLeft[0] - 1, 59, 59]);
-      } else if (timeLeft[2] === 0) {
-        setTimeLeft([timeLeft[0], timeLeft[1] - 1, 59]);
+      } else if (breakTimeLeft[1] === 0 && breakTimeLeft[2] === 0) {
+        setBreakTimeLeft([breakTimeLeft[0] - 1, 59, 59]);
+      } else if (breakTimeLeft[2] === 0) {
+        setBreakTimeLeft([breakTimeLeft[0], breakTimeLeft[1] - 1, 59]);
       } else {
-        setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
+        setBreakTimeLeft([
+          breakTimeLeft[0],
+          breakTimeLeft[1],
+          breakTimeLeft[2] - 1,
+        ]);
       }
     },
     reset: () => {
-      setTimeLeft([...breakTimer.startTime]);
+      setBreakTimeLeft([...breakTimer.startTime]);
     },
   };
 
@@ -71,7 +88,6 @@ const App: React.FC = () => {
     cycle: cycle,
     workTimer: workTimer,
     breakTimer: breakTimer,
-    timeLeft: timeLeft,
     start: () => {
       pomodoroTimer.on = true;
     },
@@ -81,7 +97,6 @@ const App: React.FC = () => {
     reset: () => {
       pomodoroTimer.on = false;
       pomodoroTimer.cycle = "Work";
-      pomodoroTimer.timeLeft = workTimer.startTime;
     },
   };
 
