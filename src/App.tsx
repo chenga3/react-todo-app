@@ -26,7 +26,7 @@ const App: React.FC = () => {
     },
     countdown: () => {
       if (timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
-        workTimer.reset(workTimer.startTime);
+        workTimer.reset();
       } else if (timeLeft[1] === 0 && timeLeft[2] === 0) {
         setTimeLeft([timeLeft[0] - 1, 59, 59]);
       } else if (timeLeft[2] === 0) {
@@ -35,8 +35,34 @@ const App: React.FC = () => {
         setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
       }
     },
-    reset: (time: Array<number>) => {
-      setTimeLeft([...time]);
+    reset: () => {
+      setTimeLeft([...workTimer.startTime]);
+    },
+  };
+
+  const breakTimer: Timer = {
+    on: false,
+    timeLeft: timeLeft,
+    startTime: breakTime,
+    sound: sound,
+    setStartTime: setBreakTime,
+    setSound: setSound,
+    toggle: () => {
+      breakTimer.on = !breakTimer.on;
+    },
+    countdown: () => {
+      if (timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
+        breakTimer.reset();
+      } else if (timeLeft[1] === 0 && timeLeft[2] === 0) {
+        setTimeLeft([timeLeft[0] - 1, 59, 59]);
+      } else if (timeLeft[2] === 0) {
+        setTimeLeft([timeLeft[0], timeLeft[1] - 1, 59]);
+      } else {
+        setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
+      }
+    },
+    reset: () => {
+      setTimeLeft([...breakTimer.startTime]);
     },
   };
 

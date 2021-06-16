@@ -7,7 +7,7 @@ export type Timer = {
   setSound: (sound: boolean) => void;
   toggle: () => void;
   countdown: () => void;
-  reset: (time: Array<number>) => void;
+  reset: () => void;
 };
 
 export type Todo = {

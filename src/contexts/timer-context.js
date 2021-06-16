@@ -9,5 +9,5 @@ export const TimerContext = React.createContext({
   setSound: (sound) => {},
   toggle: () => {},
   countdown: () => {},
-  reset: (time) => {},
+  reset: () => {},
 });
