@@ -1,15 +1,13 @@
 import React from "react";
 
 export const TimerContext = React.createContext({
-  cycle: "Off",
-  timeLeft: [0, 25, 0],
-  workTime: [0, 25, 0],
-  breakTime: [0, 5, 0],
+  on: false,
+  timeLeft: [0, 0, 0],
+  startTime: [0, 0, 0],
   sound: true,
-  setCycle: (cycle) => {},
-  setWorkTime: (workTime) => {},
-  setBreakTime: (breakTime) => {},
+  setStartTime: (startTime) => {},
   setSound: (sound) => {},
+  toggle: () => {},
   countdown: () => {},
   reset: (time) => {},
 });

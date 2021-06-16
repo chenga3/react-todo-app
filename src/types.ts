@@ -1,13 +1,11 @@
 export type Timer = {
-  cycle: string;
+  on: boolean;
   timeLeft: Array<number>;
-  workTime: Array<number>;
-  breakTime: Array<number>;
+  startTime: Array<number>;
   sound: boolean;
-  setCycle: (cycle: string) => void;
-  setWorkTime: (workTime: Array<number>) => void;
-  setBreakTime: (breakTime: Array<number>) => void;
+  setStartTime: (workTime: Array<number>) => void;
   setSound: (sound: boolean) => void;
+  toggle: () => void;
   countdown: () => void;
   reset: (time: Array<number>) => void;
 };

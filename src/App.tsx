@@ -14,28 +14,19 @@ const App: React.FC = () => {
   const [breakTime, setBreakTime] = useState<Array<number>>([0, 5, 0]);
   const [sound, setSound] = useState<boolean>(true);
 
-  const pomodoroTimer: Timer = {
-    cycle: cycle,
+  const workTimer: Timer = {
+    on: false,
     timeLeft: timeLeft,
-    workTime: workTime,
-    breakTime: breakTime,
+    startTime: workTime,
     sound: sound,
-    setCycle: setCycle,
-    setWorkTime: setWorkTime,
-    setBreakTime: setBreakTime,
+    setStartTime: setWorkTime,
     setSound: setSound,
+    toggle: () => {
+      workTimer.on = !workTimer.on;
+    },
     countdown: () => {
-      if (cycle === "Off") {
-        return;
-      } else if (timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
-        // move to next state
-        if (cycle === "Work") {
-          setCycle("Break");
-          pomodoroTimer.reset(breakTime);
-        } else if (cycle === "Break") {
-          setCycle("Work");
-          pomodoroTimer.reset(workTime);
-        }
+      if (timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
+        workTimer.reset(workTimer.startTime);
       } else if (timeLeft[1] === 0 && timeLeft[2] === 0) {
         setTimeLeft([timeLeft[0] - 1, 59, 59]);
       } else if (timeLeft[2] === 0) {
@@ -51,13 +42,13 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      pomodoroTimer.countdown();
+      workTimer.countdown();
     }, 1000);
     return () => clearTimeout(timer);
   });
 
   return (
-    <TimerContext.Provider value={pomodoroTimer}>
+    <TimerContext.Provider value={workTimer}>
       <div className="p-4">
         <Navbar />
         <Switch>
