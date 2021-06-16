@@ -6,7 +6,7 @@ import DownController from "./DownController";
 
 interface PropsTypes {
   cycle: string;
-  time: string;
+  time: number;
   placeValue: string;
 }
 

@@ -5,7 +5,7 @@ import { TimerContext } from "./contexts/timer-context";
 import { Timer } from "./types";
 import Todos from "./pages/todos";
 import Pomodoro from "./pages/pomodoro";
-import Navbar from "./components/navbar";
+import Navbar from "./core/navbar";
 
 const App: React.FC = () => {
   const [cycle, setCycle] = useState<string>("Off");
