@@ -9,6 +9,9 @@ import Navbar from "./core/Navbar";
 
 const App: React.FC = () => {
   const [cycle, setCycle] = useState<string>("Off");
+  const [workTimerOn, setWorkTimerOn] = useState<boolean>(false);
+  const [breakTimerOn, setBreakTimerOn] = useState<boolean>(false);
+  const [pomodoroTimerOn, setPomodoroTimerOn] = useState<boolean>(false);
   const [workTimeLeft, setWorkTimeLeft] = useState<Array<number>>([0, 25, 0]);
   const [breakTimeLeft, setBreakTimeLeft] = useState<Array<number>>([0, 5, 0]);
   const [workTime, setWorkTime] = useState<Array<number>>([0, 25, 0]);
@@ -16,7 +19,7 @@ const App: React.FC = () => {
   const [sound, setSound] = useState<boolean>(true);
 
   const workTimer: Timer = {
-    on: false,
+    on: workTimerOn,
     timeLeft: workTimeLeft,
     startTime: workTime,
     sound: sound,
@@ -47,7 +50,7 @@ const App: React.FC = () => {
   };
 
   const breakTimer: Timer = {
-    on: false,
+    on: breakTimerOn,
     timeLeft: breakTimeLeft,
     startTime: breakTime,
     sound: sound,
@@ -79,17 +82,16 @@ const App: React.FC = () => {
   };
 
   const pomodoroTimer: PomodoroTimer = {
-    on: true,
+    on: pomodoroTimerOn,
     cycle: cycle,
     workTimer: workTimer,
     breakTimer: breakTimer,
     countdown: () => {
-      console.log(workTimer.on);
       if (cycle === "Work") {
         if (!workTimer.on) {
           // Reached end of the work cycle
           setCycle("Break");
-          breakTimer.on = true;
+          setBreakTimerOn(true);
           breakTimer.countdown();
         } else {
           workTimer.countdown();
@@ -98,7 +100,7 @@ const App: React.FC = () => {
         if (!breakTimer.on) {
           // Reached end of the break cycle
           setCycle("Work");
-          workTimer.on = true;
+          setWorkTimerOn(true);
           workTimer.countdown();
         } else {
           breakTimer.countdown();
@@ -106,17 +108,17 @@ const App: React.FC = () => {
       }
     },
     start: () => {
-      pomodoroTimer.on = true;
+      setPomodoroTimerOn(true);
       setCycle("Work"); // Start with work cycle
-      workTimer.on = true;
-      breakTimer.on = false;
+      setWorkTimerOn(true);
+      setBreakTimerOn(false);
     },
     pause: () => {
-      pomodoroTimer.on = false;
+      setPomodoroTimerOn(false);
     },
     reset: () => {
-      pomodoroTimer.on = false;
-      pomodoroTimer.cycle = "Work";
+      setPomodoroTimerOn(false);
+      setCycle("Work");
     },
   };
 
