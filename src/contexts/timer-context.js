@@ -5,6 +5,7 @@ export const TimerContext = React.createContext({
   cycle: "Work",
   workTimer: {},
   breakTimer: {},
+  countdown: () => {},
   start: () => {},
   pause: () => {},
   reset: () => {},

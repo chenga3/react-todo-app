@@ -3,6 +3,7 @@ export type PomodoroTimer = {
   cycle: string;
   workTimer: Timer;
   breakTimer: Timer;
+  countdown: () => void;
   start: () => void;
   pause: () => void;
   reset: () => void;

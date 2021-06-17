@@ -32,6 +32,7 @@ const App: React.FC = () => {
         workTimeLeft[2] === 0
       ) {
         workTimer.reset();
+        workTimer.toggle();
       } else if (workTimeLeft[1] === 0 && workTimeLeft[2] === 0) {
         setWorkTimeLeft([workTimeLeft[0] - 1, 59, 59]);
       } else if (workTimeLeft[2] === 0) {
@@ -66,6 +67,7 @@ const App: React.FC = () => {
         breakTimeLeft[2] === 0
       ) {
         breakTimer.reset();
+        breakTimer.toggle();
       } else if (breakTimeLeft[1] === 0 && breakTimeLeft[2] === 0) {
         setBreakTimeLeft([breakTimeLeft[0] - 1, 59, 59]);
       } else if (breakTimeLeft[2] === 0) {
@@ -88,8 +90,29 @@ const App: React.FC = () => {
     cycle: cycle,
     workTimer: workTimer,
     breakTimer: breakTimer,
+    countdown: () => {
+      if (cycle === "Work") {
+        if (!workTimer.on) {
+          // Reached end of the work cycle
+          setCycle("Break");
+          breakTimer.countdown();
+        } else {
+          workTimer.countdown();
+        }
+      } else if (cycle === "Break") {
+        if (!breakTimer.on) {
+          // Reached end of the break cycle
+          setCycle("Work");
+          workTimer.countdown();
+        } else {
+          breakTimer.countdown();
+        }
+      }
+    },
     start: () => {
       pomodoroTimer.on = true;
+      workTimer.on = true; // Start with work cycle
+      breakTimer.on = false;
     },
     pause: () => {
       pomodoroTimer.on = false;
