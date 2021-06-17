@@ -16,7 +16,6 @@ export type Timer = {
   sound: boolean;
   setStartTime: (workTime: Array<number>) => void;
   setSound: (sound: boolean) => void;
-  toggle: () => void;
   countdown: () => void;
   reset: () => void;
 };

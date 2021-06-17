@@ -9,7 +9,6 @@ const workTimer: Timer = {
   sound: true,
   setStartTime: (workTime) => {},
   setSound: (sound) => {},
-  toggle: () => {},
   countdown: () => {},
   reset: () => {},
 };
@@ -21,7 +20,6 @@ const breakTimer: Timer = {
   sound: true,
   setStartTime: (breakTime) => {},
   setSound: (sound) => {},
-  toggle: () => {},
   countdown: () => {},
   reset: () => {},
 };

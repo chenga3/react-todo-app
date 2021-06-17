@@ -22,9 +22,6 @@ const App: React.FC = () => {
     sound: sound,
     setStartTime: setWorkTime,
     setSound: setSound,
-    toggle: () => {
-      workTimer.on = !workTimer.on;
-    },
     countdown: () => {
       if (
         workTimeLeft[0] === 0 &&
@@ -46,7 +43,6 @@ const App: React.FC = () => {
     },
     reset: () => {
       setWorkTimeLeft([...workTimer.startTime]);
-      workTimer.on = false;
     },
   };
 
@@ -57,9 +53,6 @@ const App: React.FC = () => {
     sound: sound,
     setStartTime: setBreakTime,
     setSound: setSound,
-    toggle: () => {
-      breakTimer.on = !breakTimer.on;
-    },
     countdown: () => {
       if (
         breakTimeLeft[0] === 0 &&
