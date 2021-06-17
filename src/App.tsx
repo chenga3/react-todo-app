@@ -3,9 +3,9 @@ import { Switch, Route } from "react-router-dom";
 
 import { TimerContext } from "./contexts/timer-context";
 import { PomodoroTimer, Timer } from "./types";
-import Todos from "./pages/todos";
-import Pomodoro from "./pages/pomodoro";
-import Navbar from "./core/navbar";
+import Todos from "./pages/Todos";
+import Pomodoro from "./pages/Pomodoro";
+import Navbar from "./core/Navbar";
 
 const App: React.FC = () => {
   const [cycle, setCycle] = useState<string>("Off");
