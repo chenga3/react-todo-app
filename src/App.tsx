@@ -32,7 +32,6 @@ const App: React.FC = () => {
         workTimeLeft[2] === 0
       ) {
         workTimer.reset();
-        workTimer.toggle();
       } else if (workTimeLeft[1] === 0 && workTimeLeft[2] === 0) {
         setWorkTimeLeft([workTimeLeft[0] - 1, 59, 59]);
       } else if (workTimeLeft[2] === 0) {
@@ -47,6 +46,7 @@ const App: React.FC = () => {
     },
     reset: () => {
       setWorkTimeLeft([...workTimer.startTime]);
+      workTimer.on = false;
     },
   };
 
@@ -67,7 +67,6 @@ const App: React.FC = () => {
         breakTimeLeft[2] === 0
       ) {
         breakTimer.reset();
-        breakTimer.toggle();
       } else if (breakTimeLeft[1] === 0 && breakTimeLeft[2] === 0) {
         setBreakTimeLeft([breakTimeLeft[0] - 1, 59, 59]);
       } else if (breakTimeLeft[2] === 0) {
@@ -82,6 +81,7 @@ const App: React.FC = () => {
     },
     reset: () => {
       setBreakTimeLeft([...breakTimer.startTime]);
+      breakTimer.on = false;
     },
   };
 
@@ -91,10 +91,12 @@ const App: React.FC = () => {
     workTimer: workTimer,
     breakTimer: breakTimer,
     countdown: () => {
+      console.log(workTimer.on);
       if (cycle === "Work") {
         if (!workTimer.on) {
           // Reached end of the work cycle
           setCycle("Break");
+          breakTimer.on = true;
           breakTimer.countdown();
         } else {
           workTimer.countdown();
@@ -103,6 +105,7 @@ const App: React.FC = () => {
         if (!breakTimer.on) {
           // Reached end of the break cycle
           setCycle("Work");
+          workTimer.on = true;
           workTimer.countdown();
         } else {
           breakTimer.countdown();
@@ -111,7 +114,8 @@ const App: React.FC = () => {
     },
     start: () => {
       pomodoroTimer.on = true;
-      workTimer.on = true; // Start with work cycle
+      setCycle("Work"); // Start with work cycle
+      workTimer.on = true;
       breakTimer.on = false;
     },
     pause: () => {
@@ -124,8 +128,13 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    pomodoroTimer.start();
+    console.log(workTimer.on);
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
-      workTimer.countdown();
+      pomodoroTimer.countdown();
     }, 1000);
     return () => clearTimeout(timer);
   });
