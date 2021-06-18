@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-const CountdownTimer: React.FC = () => {
-  const [status, setStatus] = useState<string>("OFF");
+interface PropsType {
+  status: string;
+  setStatus: (status: string) => void;
+}
+
+const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
   const [timeLeft, setTimeLeft] = useState<Array<number>>([-1, -1, -1]);
   const [startTime, setStartTime] = useState<Array<number>>([0, 0, 3]);
 
