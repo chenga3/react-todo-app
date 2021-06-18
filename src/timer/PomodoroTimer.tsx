@@ -13,6 +13,15 @@ const PomodoroTimer: React.FC = () => {
     setBreakTimerStatus("OFF");
   };
 
+  const pause = () => {
+    setStatus("PAUSED");
+    if (status === "WORK") {
+      setWorkTimerStatus("PAUSED");
+    } else if (status === "BREAK") {
+      setBreakTimerStatus("PAUSED");
+    }
+  };
+
   useEffect(() => {
     if (status === "WORK") {
       if (workTimerStatus === "FINISHED") {
@@ -38,7 +47,7 @@ const PomodoroTimer: React.FC = () => {
         setStatus={setBreakTimerStatus}
       />
       <button onClick={start}>Start</button>
-      <button>Pause</button>
+      <button onClick={pause}> Pause</button>
       <button>Reset</button>
     </div>
   );
