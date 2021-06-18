@@ -2,7 +2,7 @@ import React from "react";
 
 import Navlink from "./Navlink";
 
-import logo from "../images/logo.jpg";
+import logo from "../images/logo.png";
 
 const Navbar: React.FC = () => {
   return (
