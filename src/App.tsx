@@ -89,22 +89,20 @@ const App: React.FC = () => {
     breakTimer: breakTimer,
     countdown: () => {
       if (cycle === "Work") {
+        workTimer.countdown();
         if (!workTimer.on) {
           // Reached end of the work cycle
           setCycle("Break");
           setBreakTimerOn(true);
           breakTimer.countdown();
-        } else {
-          workTimer.countdown();
         }
       } else if (cycle === "Break") {
+        breakTimer.countdown();
         if (!breakTimer.on) {
           // Reached end of the break cycle
           setCycle("Work");
           setWorkTimerOn(true);
           workTimer.countdown();
-        } else {
-          breakTimer.countdown();
         }
       }
     },
