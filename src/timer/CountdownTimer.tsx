@@ -22,10 +22,6 @@ const CountdownTimer: React.FC = () => {
       setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
     };
 
-    const checkDone = () => {
-      return timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0;
-    };
-
     if (status === "OFF") {
       setTimeLeft([...startTime]);
     }
@@ -36,11 +32,18 @@ const CountdownTimer: React.FC = () => {
       }
     }, 1000);
 
+    return () => clearTimeout(timer);
+  }, [startTime, status, timeLeft]);
+
+  useEffect(() => {
+    const checkDone = () => {
+      return timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0;
+    };
+
     if (checkDone()) {
       setStatus("FINISHED");
     }
-    return () => clearTimeout(timer);
-  }, [startTime, status, timeLeft]);
+  }, [timeLeft]);
 
   return (
     <div>
