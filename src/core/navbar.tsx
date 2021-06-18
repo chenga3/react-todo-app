@@ -5,7 +5,7 @@ import logo from "../images/logo.jpg";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="flex flex-row items-center">
+    <div className="flex flex-row items-center bg-green-light">
       <div className="flex flex-row items-center mr-4">
         <img className="w-12" src={logo} alt="logo" />
         <span className="text-2xl">Producktivity</span>
