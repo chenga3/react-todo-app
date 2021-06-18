@@ -70,9 +70,9 @@ const CountdownTimer: React.FC = () => {
       <div>Timer is {status}</div>
       <div>{timeLeft.join(":")}</div>
       <div>{startTime.join(":")}</div>
-      <button onClick={startTimer}>Start</button>
+      {/* <button onClick={startTimer}>Start</button>
       <button onClick={pause}>Pause</button>
-      <button onClick={reset}>Reset</button>
+      <button onClick={reset}>Reset</button> */}
     </div>
   );
 };
