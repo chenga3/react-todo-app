@@ -70,24 +70,29 @@ const PomodoroTimer: React.FC = () => {
   return (
     <div>
       <div>Pomodoro timer is in {status} mode</div>
-      <CountdownTimer status={workTimerStatus} setStatus={setWorkTimerStatus} />
-      <CountdownTimer
-        status={breakTimerStatus}
-        setStatus={setBreakTimerStatus}
-      />
-      {status === "PAUSED" ? (
-        <div>
-          <button onClick={resume}>Resume</button>
-          <button onClick={reset}>Reset</button>
-        </div>
-      ) : status === "OFF" ? (
-        <button onClick={start}>Start</button>
-      ) : (
-        <div>
+      <div className="my-8 bg-yellow-light">
+        <CountdownTimer
+          status={workTimerStatus}
+          setStatus={setWorkTimerStatus}
+        />
+        <CountdownTimer
+          status={breakTimerStatus}
+          setStatus={setBreakTimerStatus}
+        />
+        {status === "PAUSED" ? (
+          <div>
+            <button onClick={resume}>Resume</button>
+            <button onClick={reset}>Reset</button>
+          </div>
+        ) : status === "OFF" ? (
           <button onClick={start}>Start</button>
-          <button onClick={pause}> Pause</button>
-        </div>
-      )}
+        ) : (
+          <div>
+            <button onClick={start}>Start</button>
+            <button onClick={pause}> Pause</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
