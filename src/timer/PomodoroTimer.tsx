@@ -8,14 +8,14 @@ const PomodoroTimer: React.FC = () => {
   const [status, setStatus] = useState<string>("OFF");
 
   const start = () => {
-    setStatus("ON");
+    setStatus("WORK");
     setWorkTimerStatus("ON");
     setBreakTimerStatus("OFF");
   };
 
   return (
     <div>
-      <div>Pomodoro timer is {status}</div>
+      <div>Pomodoro timer is in {status} mode</div>
       <CountdownTimer status={workTimerStatus} setStatus={setWorkTimerStatus} />
       <CountdownTimer
         status={breakTimerStatus}
