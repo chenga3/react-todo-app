@@ -7,10 +7,12 @@ const PomodoroTimer: React.FC = () => {
   const [breakTimerStatus, setBreakTimerStatus] = useState<string>("OFF");
   const [status, setStatus] = useState<string>("OFF");
 
+  /** Begins with WORK cycle. */
   const start = () => {
     setStatus("WORK");
   };
 
+  /** Resumes timer after being paused. */
   const resume = () => {
     if (workTimerStatus === "PAUSED") {
       setStatus("WORK");
@@ -19,6 +21,7 @@ const PomodoroTimer: React.FC = () => {
     }
   };
 
+  /** Pauses the timer. */
   const pause = () => {
     setStatus("PAUSED");
     if (status === "WORK") {
@@ -28,11 +31,13 @@ const PomodoroTimer: React.FC = () => {
     }
   };
 
+  /** Resets the timer. */
   const reset = () => {
     setStatus("OFF");
   };
 
   useEffect(() => {
+    // Check if cycle has ended, and switch if so.
     if (status === "WORK") {
       if (workTimerStatus === "FINISHED") {
         setBreakTimerStatus("ON");
@@ -49,6 +54,7 @@ const PomodoroTimer: React.FC = () => {
   }, [status, workTimerStatus, breakTimerStatus]);
 
   useEffect(() => {
+    // Ties pomodoro timer status with work/break timer statuses.
     if (status === "OFF") {
       setWorkTimerStatus("OFF");
       setBreakTimerStatus("OFF");
