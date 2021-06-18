@@ -1,6 +1,6 @@
 import React from "react";
 
-import Timer from "../timer/Timer";
+import Timer from "../timer/PomodoroTimer";
 
 const Pomodoro: React.FC = () => {
   return (
