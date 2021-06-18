@@ -23,7 +23,19 @@ const CountdownTimer: React.FC = () => {
   useEffect(() => {
     /** Decrements time left */
     const countdown = () => {
-      setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
+      if (timeLeft[0] <= 0 && timeLeft[1] <= 0 && timeLeft[2] <= 0) {
+        // Do nothing
+        return;
+      } else if (timeLeft[0] > 0 && timeLeft[1] === 0 && timeLeft[2] === 0) {
+        // Decrement hour
+        setTimeLeft([timeLeft[0] - 1, 59, 59]);
+      } else if (timeLeft[0] >= 0 && timeLeft[1] > 0 && timeLeft[2] === 0) {
+        // Decrement minute
+        setTimeLeft([timeLeft[0], timeLeft[1] - 1, 59]);
+      } else {
+        // Decrement second
+        setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
+      }
     };
 
     // When the timer is off, time left should equal the start time
