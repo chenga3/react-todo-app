@@ -10,12 +10,23 @@ const CountdownTimer: React.FC = () => {
     setStatus("ON");
   };
 
+  const pause = () => {
+    setStatus("PAUSED");
+  };
+
+  const reset = () => {
+    setTimeLeft([0, 0, 0]);
+    setStatus("OFF");
+  };
+
   return (
     <div>
       <div>Timer is {status}</div>
       <div>{timeLeft.join(":")}</div>
       <div>{startTime.join(":")}</div>
       <button onClick={startTimer}>Start</button>
+      <button onClick={pause}>Pause</button>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 };
