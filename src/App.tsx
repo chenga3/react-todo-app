@@ -12,10 +12,10 @@ const App: React.FC = () => {
   const [workTimerOn, setWorkTimerOn] = useState<boolean>(false);
   const [breakTimerOn, setBreakTimerOn] = useState<boolean>(false);
   const [pomodoroTimerOn, setPomodoroTimerOn] = useState<boolean>(false);
-  const [workTimeLeft, setWorkTimeLeft] = useState<Array<number>>([0, 25, 0]);
-  const [breakTimeLeft, setBreakTimeLeft] = useState<Array<number>>([0, 5, 0]);
-  const [workTime, setWorkTime] = useState<Array<number>>([0, 25, 0]);
-  const [breakTime, setBreakTime] = useState<Array<number>>([0, 5, 0]);
+  const [workTimeLeft, setWorkTimeLeft] = useState<Array<number>>([0, 0, 10]);
+  const [breakTimeLeft, setBreakTimeLeft] = useState<Array<number>>([0, 0, 5]);
+  const [workTime, setWorkTime] = useState<Array<number>>([0, 0, 10]);
+  const [breakTime, setBreakTime] = useState<Array<number>>([0, 0, 5]);
   const [sound, setSound] = useState<boolean>(true);
 
   const workTimer: Timer = {
@@ -46,6 +46,7 @@ const App: React.FC = () => {
     },
     reset: () => {
       setWorkTimeLeft([...workTimer.startTime]);
+      setWorkTimerOn(false);
     },
   };
 
@@ -77,7 +78,7 @@ const App: React.FC = () => {
     },
     reset: () => {
       setBreakTimeLeft([...breakTimer.startTime]);
-      breakTimer.on = false;
+      setBreakTimerOn(false);
     },
   };
 
