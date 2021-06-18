@@ -69,10 +69,23 @@ const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
     }
   }, [timeLeft]);
 
+  const bgColor =
+    status === "ON"
+      ? "bg-green-dark"
+      : status === "PAUSED"
+      ? "bg-green-light"
+      : "bg-yellow";
+
   return (
     <div>
       <div>Timer is {status}</div>
-      <div>{timeLeft.join(":")}</div>
+      <div
+        className={
+          "w-72 py-4 text-7xl text-center rounded-3xl shadow-md " + bgColor
+        }
+      >
+        {timeLeft.join(":")}
+      </div>
       <div>{startTime.join(":")}</div>
       {/* <button onClick={startTimer}>Start</button>
       <button onClick={pause}>Pause</button>
