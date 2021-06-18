@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import Button from "../core/Button";
 import CountdownTimer from "./CountdownTimer";
 
 const PomodoroTimer: React.FC = () => {
@@ -81,16 +82,13 @@ const PomodoroTimer: React.FC = () => {
         />
         {status === "PAUSED" ? (
           <div>
-            <button onClick={resume}>Resume</button>
-            <button onClick={reset}>Reset</button>
+            <Button label="Start" onClick={resume} />
+            <Button label="Reset" onClick={reset} />
           </div>
         ) : status === "OFF" ? (
-          <button onClick={start}>Start</button>
+          <Button label="Start" onClick={start} />
         ) : (
-          <div>
-            <button onClick={start}>Start</button>
-            <button onClick={pause}> Pause</button>
-          </div>
+          <Button label="Pause" onClick={pause} />
         )}
       </div>
     </div>
