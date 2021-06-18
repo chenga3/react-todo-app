@@ -7,7 +7,7 @@ import Navbar from "./core/Navbar";
 
 const App: React.FC = () => {
   return (
-    <div className="bg-grey">
+    <div className="bg-grey-light">
       <Navbar />
       <Switch>
         <Route path="/todos">

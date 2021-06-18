@@ -7,7 +7,10 @@ interface PropsType {
 
 const Button: React.FC<PropsType> = ({ label, onClick }) => {
   return (
-    <button className="w-20 px-4 py-1 bg-grey rounded-lg" onClick={onClick}>
+    <button
+      className="w-20 px-4 py-1 bg-grey-light hover:bg-grey rounded-lg"
+      onClick={onClick}
+    >
       {label}
     </button>
   );
