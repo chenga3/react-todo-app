@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const CountdownTimer: React.FC = () => {
   const [status, setStatus] = useState<string>("OFF");
@@ -18,6 +18,19 @@ const CountdownTimer: React.FC = () => {
     setTimeLeft([0, 0, 0]);
     setStatus("OFF");
   };
+
+  useEffect(() => {
+    const countdown = () => {
+      setTimeLeft([timeLeft[0], timeLeft[1], timeLeft[2] - 1]);
+    };
+
+    const timer = setInterval(() => {
+      if (status === "ON") {
+        countdown();
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
 
   return (
     <div>
