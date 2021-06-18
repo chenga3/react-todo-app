@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CountdownTimer from "./CountdownTimer";
 
@@ -12,6 +12,22 @@ const PomodoroTimer: React.FC = () => {
     setWorkTimerStatus("ON");
     setBreakTimerStatus("OFF");
   };
+
+  useEffect(() => {
+    if (status === "WORK") {
+      if (workTimerStatus === "FINISHED") {
+        setBreakTimerStatus("ON");
+        setWorkTimerStatus("OFF");
+        setStatus("BREAK");
+      }
+    } else if (status === "BREAK") {
+      if (breakTimerStatus === "FINISHED") {
+        setWorkTimerStatus("ON");
+        setBreakTimerStatus("OFF");
+        setStatus("WORK");
+      }
+    }
+  }, [status, workTimerStatus, breakTimerStatus]);
 
   return (
     <div>
