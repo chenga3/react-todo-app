@@ -9,8 +9,14 @@ const PomodoroTimer: React.FC = () => {
 
   const start = () => {
     setStatus("WORK");
-    setWorkTimerStatus("ON");
-    setBreakTimerStatus("OFF");
+  };
+
+  const resume = () => {
+    if (workTimerStatus === "PAUSED") {
+      setStatus("WORK");
+    } else if (breakTimerStatus === "PAUSED") {
+      setStatus("BREAK");
+    }
   };
 
   const pause = () => {
@@ -46,6 +52,12 @@ const PomodoroTimer: React.FC = () => {
     if (status === "OFF") {
       setWorkTimerStatus("OFF");
       setBreakTimerStatus("OFF");
+    } else if (status === "WORK") {
+      setWorkTimerStatus("ON");
+      setBreakTimerStatus("OFF");
+    } else if (status === "BREAK") {
+      setWorkTimerStatus("OFF");
+      setBreakTimerStatus("ON");
     }
   }, [status]);
 
@@ -57,9 +69,19 @@ const PomodoroTimer: React.FC = () => {
         status={breakTimerStatus}
         setStatus={setBreakTimerStatus}
       />
-      <button onClick={start}>Start</button>
-      <button onClick={pause}> Pause</button>
-      <button onClick={reset}>Reset</button>
+      {status === "PAUSED" ? (
+        <div>
+          <button onClick={resume}>Resume</button>
+          <button onClick={reset}>Reset</button>
+        </div>
+      ) : status === "OFF" ? (
+        <button onClick={start}>Start</button>
+      ) : (
+        <div>
+          <button onClick={start}>Start</button>
+          <button onClick={pause}> Pause</button>
+        </div>
+      )}
     </div>
   );
 };
