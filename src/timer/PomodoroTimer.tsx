@@ -7,6 +7,12 @@ const PomodoroTimer: React.FC = () => {
   const [breakTimerStatus, setBreakTimerStatus] = useState<string>("OFF");
   const [status, setStatus] = useState<string>("OFF");
 
+  const start = () => {
+    setStatus("ON");
+    setWorkTimerStatus("ON");
+    setBreakTimerStatus("OFF");
+  };
+
   return (
     <div>
       <div>Pomodoro timer is {status}</div>
@@ -15,7 +21,7 @@ const PomodoroTimer: React.FC = () => {
         status={breakTimerStatus}
         setStatus={setBreakTimerStatus}
       />
-      <button>Start</button>
+      <button onClick={start}>Start</button>
       <button>Pause</button>
       <button>Reset</button>
     </div>
