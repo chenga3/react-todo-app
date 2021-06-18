@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 
 const CountdownTimer: React.FC = () => {
   const [status, setStatus] = useState<string>("OFF");
-  const [timeLeft, setTimeLeft] = useState<Array<number>>([0, 0, 0]);
+  const [timeLeft, setTimeLeft] = useState<Array<number>>([-1, -1, -1]);
   const [startTime, setStartTime] = useState<Array<number>>([0, 0, 3]);
 
   const startTimer = () => {
-    setTimeLeft([...startTime]);
     setStatus("ON");
   };
 
@@ -15,7 +14,6 @@ const CountdownTimer: React.FC = () => {
   };
 
   const reset = () => {
-    setTimeLeft([0, 0, 0]);
     setStatus("OFF");
   };
 
@@ -28,16 +26,21 @@ const CountdownTimer: React.FC = () => {
       return timeLeft[0] === 0 && timeLeft[1] === 0 && timeLeft[2] === 0;
     };
 
+    if (status === "OFF") {
+      setTimeLeft([...startTime]);
+    }
+
     const timer = setInterval(() => {
       if (status === "ON") {
         countdown();
       }
     }, 1000);
+
     if (checkDone()) {
       setStatus("FINISHED");
     }
     return () => clearTimeout(timer);
-  }, [status, timeLeft]);
+  }, [startTime, status, timeLeft]);
 
   return (
     <div>
