@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+
+import TodoList from "../todos/TodoList";
+
 import type { Todo } from "../types";
 
 const inMemoryTodoService = () => {
@@ -108,6 +111,7 @@ const Todos = () => {
 
   return (
     <div>
+      <TodoList todos={todos} onCheck={handleChecked} />
       <div>
         <h1 className="text-3xl">Add Todo</h1>
         <form onSubmit={handleSubmit}>
@@ -118,40 +122,11 @@ const Todos = () => {
           </button>
         </form>
       </div>
-      <div>
-        <h1 className="text-3xl">Todo List</h1>
-        <Checklist todos={todos} onCheck={handleChecked} />
-        <button className="border-2" type="button" onClick={handleDeleteDone}>
-          Delete Done Todos
-        </button>
-      </div>
+      <button className="border-2" type="button" onClick={handleDeleteDone}>
+        Delete Done Todos
+      </button>
     </div>
   );
 };
-
-interface ChecklistProps {
-  todos: Array<Todo>;
-  onCheck: (id: number, done: boolean) => void;
-}
-
-const Checklist: React.FC<ChecklistProps> = ({
-  todos,
-  onCheck,
-}: ChecklistProps) => (
-  <ul>
-    {todos.map(({ id, text, done }) => (
-      <li key={id}>
-        <label className={done ? "done-todo" : ""}>
-          <input
-            type="checkbox"
-            checked={done}
-            onChange={() => onCheck(id, done)}
-          />
-          {text}
-        </label>
-      </li>
-    ))}
-  </ul>
-);
 
 export default Todos;
