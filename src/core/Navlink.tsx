@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface NavlinkProps {
   text: string;
@@ -7,9 +7,13 @@ interface NavlinkProps {
 }
 
 const Navlink: React.FC<NavlinkProps> = ({ text, route }: NavlinkProps) => (
-  <Link className="p-2 hover:text-dark" to={route}>
+  <NavLink
+    className="p-2 font-medium hover:text-dark"
+    activeClassName="border-b-2 border-orange border-opacity-50"
+    to={route}
+  >
     {text}
-  </Link>
+  </NavLink>
 );
 
 export default Navlink;
