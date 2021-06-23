@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import Button from "../core/Button";
 import CountdownTimer from "./CountdownTimer";
 
 const PomodoroTimer: React.FC = () => {
@@ -70,24 +71,28 @@ const PomodoroTimer: React.FC = () => {
   return (
     <div>
       <div>Pomodoro timer is in {status} mode</div>
-      <CountdownTimer status={workTimerStatus} setStatus={setWorkTimerStatus} />
-      <CountdownTimer
-        status={breakTimerStatus}
-        setStatus={setBreakTimerStatus}
-      />
-      {status === "PAUSED" ? (
-        <div>
-          <button onClick={resume}>Resume</button>
-          <button onClick={reset}>Reset</button>
+      <div className="my-8 bg-yellow-light">
+        <div className="flex flex-row space-x-16">
+          <CountdownTimer
+            status={workTimerStatus}
+            setStatus={setWorkTimerStatus}
+          />
+          <CountdownTimer
+            status={breakTimerStatus}
+            setStatus={setBreakTimerStatus}
+          />
         </div>
-      ) : status === "OFF" ? (
-        <button onClick={start}>Start</button>
-      ) : (
-        <div>
-          <button onClick={start}>Start</button>
-          <button onClick={pause}> Pause</button>
-        </div>
-      )}
+        {status === "PAUSED" ? (
+          <div>
+            <Button label="Start" onClick={resume} />
+            <Button label="Reset" onClick={reset} />
+          </div>
+        ) : status === "OFF" ? (
+          <Button label="Start" onClick={start} />
+        ) : (
+          <Button label="Pause" onClick={pause} />
+        )}
+      </div>
     </div>
   );
 };
