@@ -13,15 +13,14 @@ const TodoList: React.FC<Props> = ({ todos, onCheck }) => {
       <h1 className="text-3xl font-semibold">Todo List</h1>
       <ul>
         {todos.map(({ id, text, done }) => (
-          <li key={id}>
-            <label className={done ? "done-todo" : ""}>
-              <input
-                type="checkbox"
-                checked={done}
-                onChange={() => onCheck(id, done)}
-              />
-              {text}
-            </label>
+          <li key={id} className="py-0.5">
+            <input
+              type="checkbox"
+              className="mx-3 transform scale-150"
+              checked={done}
+              onChange={() => onCheck(id, done)}
+            />
+            <span className={done ? "line-through" : ""}>{text}</span>
           </li>
         ))}
       </ul>
