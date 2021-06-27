@@ -2,7 +2,7 @@ import React from "react";
 
 interface PropsType {
   label: string;
-  onClick?: () => void;
+  onClick?: (event: React.SyntheticEvent) => void;
 }
 
 const Button: React.FC<PropsType> = ({ label, onClick }) => {

@@ -85,7 +85,7 @@ const Todos = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setInput(event.target.value);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     var newTodo = {
       id: nextid,
@@ -115,12 +115,10 @@ const Todos = () => {
       <TodoList todos={todos} onCheck={handleChecked} />
       <div>
         <h1 className="text-3xl">Add Todo</h1>
-        <form onSubmit={handleSubmit}>
+        <form>
           <input className="border-2" value={input} onChange={handleChange} />
           <br />
-          <button className="border-2" type="submit">
-            Submit
-          </button>
+          <Button label="Add" onClick={handleSubmit} />
         </form>
       </div>
       <Button label="Delete All Done" onClick={handleDeleteDone} />
