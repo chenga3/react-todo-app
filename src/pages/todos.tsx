@@ -78,12 +78,14 @@ const Todos = () => {
   const [input, setInput] = useState<string>("");
   const [todos, setTodos] = useState<Array<Todo>>([]);
 
+  /** Loads stored todos into state on intial render. */
   useEffect(() => {
     const fetchedTodos = service.load();
     setTodos(fetchedTodos);
   }, []);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  /** Adds the user input todo to their todo list. */
+  const addTodo = (event: React.FormEvent) => {
     event.preventDefault();
     var newTodo = {
       id: nextid,
@@ -96,12 +98,14 @@ const Todos = () => {
     setInput("");
   };
 
+  /** Toggles todos between 'done' and 'not done' states. */
   const handleChecked = (id: number, done: boolean) => {
     service.updateDone(id, !done);
     const fetchedTodos = service.load();
     setTodos(fetchedTodos);
   };
 
+  /** Deletes all 'done' todos. */
   const handleDeleteDone = () => {
     service.deleteDone();
     const fetchedTodos: Array<Todo> = service.load();
@@ -113,7 +117,7 @@ const Todos = () => {
       <h1>Todos</h1>
       <div className="grid grid-cols-2 bg-yellow-light">
         <TodoList todos={todos} onCheck={handleChecked} />
-        <AddTodo input={input} setInput={setInput} addTodo={handleSubmit} />
+        <AddTodo input={input} setInput={setInput} addTodo={addTodo} />
         <Button label="Delete All Done" onClick={handleDeleteDone} />
       </div>
     </div>
