@@ -11,7 +11,7 @@ interface Props {
 const AddTodo: React.FC<Props> = ({ input, setInput, addTodo }) => {
   return (
     <div>
-      <h1 className="text-3xl">Add Todo</h1>
+      <h1 className="text-3xl font-semibold">Add Todo</h1>
       <form>
         <input
           className="border-2"

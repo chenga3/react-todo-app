@@ -83,9 +83,6 @@ const Todos = () => {
     setTodos(fetchedTodos);
   }, []);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setInput(event.target.value);
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     var newTodo = {
@@ -114,7 +111,7 @@ const Todos = () => {
   return (
     <div>
       <h1>Todos</h1>
-      <div className="bg-yellow-light">
+      <div className="grid grid-cols-2 bg-yellow-light">
         <TodoList todos={todos} onCheck={handleChecked} />
         <AddTodo input={input} setInput={setInput} addTodo={handleSubmit} />
         <Button label="Delete All Done" onClick={handleDeleteDone} />
