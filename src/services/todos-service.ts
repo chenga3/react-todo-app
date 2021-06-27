@@ -5,7 +5,7 @@ export const inMemoryTodoService = () => {
   return {
     load: () => Array.from(todos.values()) ?? [],
     create: (todo: Todo) => {
-      todos.set(todo.id, todo);
+      todos.set(todo._id, todo);
     },
     updateDone: (id: number, done: boolean) => {
       const todo = todos.get(id);
@@ -34,7 +34,7 @@ export const localStorageTodoService = () => ({
     }
     const todos = JSON.parse(storageItem);
     const id = Object.keys(todos).length;
-    todo.id = id;
+    todo._id = id;
     localStorage.setItem("todos", JSON.stringify({ ...todos, [id]: todo }));
   },
   updateDone: (id: number, done: boolean) => {

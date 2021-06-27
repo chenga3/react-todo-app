@@ -25,7 +25,7 @@ const Todos = () => {
   const addTodo = (event: React.FormEvent) => {
     event.preventDefault();
     var newTodo = {
-      id: nextid,
+      _id: nextid,
       text: input,
       done: false,
     };
