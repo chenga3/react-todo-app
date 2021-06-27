@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import Button from "../core/Button";
 import TodoList from "../todos/TodoList";
 
 import type { Todo } from "../types";
@@ -122,9 +123,7 @@ const Todos = () => {
           </button>
         </form>
       </div>
-      <button className="border-2" type="button" onClick={handleDeleteDone}>
-        Delete Done Todos
-      </button>
+      <Button label="Delete All Done" onClick={handleDeleteDone} />
     </div>
   );
 };
