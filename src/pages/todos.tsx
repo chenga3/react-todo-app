@@ -112,16 +112,19 @@ const Todos = () => {
 
   return (
     <div>
-      <TodoList todos={todos} onCheck={handleChecked} />
-      <div>
-        <h1 className="text-3xl">Add Todo</h1>
-        <form>
-          <input className="border-2" value={input} onChange={handleChange} />
-          <br />
-          <Button label="Add" onClick={handleSubmit} />
-        </form>
+      <h1>Todos</h1>
+      <div className="bg-yellow-light">
+        <TodoList todos={todos} onCheck={handleChecked} />
+        <div>
+          <h1 className="text-3xl">Add Todo</h1>
+          <form>
+            <input className="border-2" value={input} onChange={handleChange} />
+            <br />
+            <Button label="Add" onClick={handleSubmit} />
+          </form>
+        </div>
+        <Button label="Delete All Done" onClick={handleDeleteDone} />
       </div>
-      <Button label="Delete All Done" onClick={handleDeleteDone} />
     </div>
   );
 };
