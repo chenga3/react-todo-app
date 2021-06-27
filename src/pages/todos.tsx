@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Button from "../core/Button";
+import AddTodo from "../todos/AddTodo";
 import TodoList from "../todos/TodoList";
 
 import type { Todo } from "../types";
@@ -115,14 +116,7 @@ const Todos = () => {
       <h1>Todos</h1>
       <div className="bg-yellow-light">
         <TodoList todos={todos} onCheck={handleChecked} />
-        <div>
-          <h1 className="text-3xl">Add Todo</h1>
-          <form>
-            <input className="border-2" value={input} onChange={handleChange} />
-            <br />
-            <Button label="Add" onClick={handleSubmit} />
-          </form>
-        </div>
+        <AddTodo input={input} setInput={setInput} addTodo={handleSubmit} />
         <Button label="Delete All Done" onClick={handleDeleteDone} />
       </div>
     </div>
