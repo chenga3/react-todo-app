@@ -4,6 +4,8 @@ const todoRoutes = express.Router();
 
 const dbo = require("../db/conn");
 
+const ObjectId = require("mongodb").ObjectId;
+
 todoRoutes.route("/todo").get(function (req, res) {
   let db_connect = dbo.getDb("producktivity");
   db_connect
@@ -18,8 +20,8 @@ todoRoutes.route("/todo").get(function (req, res) {
 todoRoutes.route("/todo/add").post(function (req, res) {
   let db_connect = dbo.getDb("producktivity");
   let myobj = {
-    todo_text: req.body.todo_text,
-    todo_done: req.body.todo_done,
+    text: req.body.text,
+    done: req.body.done,
   };
   db_connect.collection("todos").insertOne(myobj, function (err, res) {
     if (err) throw err;
@@ -28,18 +30,18 @@ todoRoutes.route("/todo/add").post(function (req, res) {
 
 todoRoutes.route("/todo/:id").post(function (req, res) {
   let db_connect = dbo.getDb("producktivity");
-  let myquery = { id: req.body.id };
+  let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
     $set: {
-      todo_text: req.body.todo_text,
-      todo_done: req.body.todo_done,
+      text: req.body.text,
+      done: req.body.done,
     },
   };
   db_connect
     .collection("todos")
     .updateOne(myquery, newvalues, function (err, res) {
       if (err) throw err;
-      console.log("1 document updated");
+      console.log(res);
     });
 });
 
