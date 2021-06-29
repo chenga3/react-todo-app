@@ -46,16 +46,16 @@ const Todos = () => {
 
   /** Toggles todos between 'done' and 'not done' states. */
   const updateTodo = (_id: number, text: string, done: boolean) => {
-    // service.updateDone(id, !done);
-    // const fetchedTodos = service.load();
-    // setTodos(fetchedTodos);
-    const newTodo = {
-      text: text,
-      done: !done,
-    };
     axios
-      .post("http://localhost:5000/todo/" + _id, newTodo)
-      .then((res) => console.log(res.data))
+      .post("http://localhost:5000/todo/" + _id, { text: text, done: !done })
+      .then((res) => {
+        // Update the todo client-side
+        setTodos(
+          todos.map((todo) =>
+            todo._id === _id ? { ...todo, done: !done } : todo
+          )
+        );
+      })
       .catch((err) => console.log(err));
   };
 

@@ -44,9 +44,9 @@ todoRoutes.route("/todo/:id").post(function (req, res) {
   };
   db_connect
     .collection(colName)
-    .updateOne(myquery, newvalues, function (err, res) {
+    .updateOne(myquery, newvalues, function (err, result) {
       if (err) throw err;
-      console.log(res);
+      res.json(result);
     });
 });
 
