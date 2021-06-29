@@ -26,15 +26,21 @@ const Todos = () => {
   /** Adds the user input todo to their todo list. */
   const addTodo = (event: React.FormEvent) => {
     event.preventDefault();
-    var newTodo = {
-      text: input,
-      done: false,
-    };
-    // service.create(newTodo);
-    // setTodos([...todos, newTodo]);
     axios
-      .post("http://localhost:5000/todo/add", newTodo)
-      .then((res) => console.log(res.data));
+      .post("http://localhost:5000/todo", {
+        text: input,
+        done: false,
+      })
+      .then((res) => {
+        // Update the todo list client-side
+        const newTodo: Todo = {
+          _id: res.data.insertedId,
+          text: input,
+          done: false,
+        };
+        setTodos([...todos, newTodo]);
+      })
+      .catch((err) => console.log(err));
     setInput("");
   };
 

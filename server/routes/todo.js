@@ -26,8 +26,9 @@ todoRoutes.route("/todo").post(function (req, res) {
     text: req.body.text,
     done: req.body.done,
   };
-  db_connect.collection(colName).insertOne(myobj, function (err, res) {
+  db_connect.collection(colName).insertOne(myobj, function (err, result) {
     if (err) throw err;
+    res.json(result);
   });
 });
 
