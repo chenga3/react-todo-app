@@ -61,12 +61,12 @@ const Todos = () => {
 
   /** Deletes all 'done' todos. */
   const handleDeleteDone = () => {
-    // service.deleteDone();
-    // const fetchedTodos: Array<Todo> = service.load();
-    // setTodos(fetchedTodos);
     axios
       .delete("http://localhost:5000/todo/done")
-      .then((res) => console.log(res))
+      .then((res) => {
+        // Update the todo list client-side
+        setTodos(todos.filter((todo) => !todo.done));
+      })
       .catch((err) => console.log(err));
   };
 

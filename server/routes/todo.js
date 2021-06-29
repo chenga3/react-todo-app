@@ -54,9 +54,9 @@ todoRoutes.route("/todo/:id").post(function (req, res) {
 todoRoutes.route("/todo/done").delete((req, res) => {
   let db_connect = dbo.getDb(dbName);
   let myquery = { done: true };
-  db_connect.collection(colName).deleteMany(myquery, (err, res) => {
+  db_connect.collection(colName).deleteMany(myquery, (err, result) => {
     if (err) throw err;
-    console.log(res);
+    res.json(result);
   });
 });
 
@@ -64,9 +64,9 @@ todoRoutes.route("/todo/done").delete((req, res) => {
 todoRoutes.route("/todo/:id").delete((req, res) => {
   let db_connect = dbo.getDb(dbName);
   var myquery = { _id: ObjectId(req.params.id) };
-  db_connect.collection(colName).deleteOne(myquery, function (err, obj) {
+  db_connect.collection(colName).deleteOne(myquery, function (err, result) {
     if (err) throw err;
-    console.log(res);
+    res.json(result);
   });
 });
 
