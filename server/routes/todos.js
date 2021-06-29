@@ -8,7 +8,7 @@ const dbName = "producktivity";
 const colName = "todos";
 
 /** Gets all todos. */
-todoRoutes.route("/todo").get(function (req, res) {
+todoRoutes.route("/").get(function (req, res) {
   let db_connect = dbo.getDb(dbName);
   db_connect
     .collection(colName)
@@ -20,7 +20,7 @@ todoRoutes.route("/todo").get(function (req, res) {
 });
 
 /** Creates a new todo. */
-todoRoutes.route("/todo").post(function (req, res) {
+todoRoutes.route("/").post(function (req, res) {
   let db_connect = dbo.getDb(dbName);
   let myobj = {
     text: req.body.text,
@@ -33,7 +33,7 @@ todoRoutes.route("/todo").post(function (req, res) {
 });
 
 /** Updates a single todo. */
-todoRoutes.route("/todo/:id").post(function (req, res) {
+todoRoutes.route("/:id").post(function (req, res) {
   let db_connect = dbo.getDb(dbName);
   let myquery = { _id: ObjectId(req.params.id) };
   let newvalues = {
@@ -51,7 +51,7 @@ todoRoutes.route("/todo/:id").post(function (req, res) {
 });
 
 /** Deletes all done todos. */
-todoRoutes.route("/todo/done").delete((req, res) => {
+todoRoutes.route("/done").delete((req, res) => {
   let db_connect = dbo.getDb(dbName);
   let myquery = { done: true };
   db_connect.collection(colName).deleteMany(myquery, (err, result) => {
@@ -61,7 +61,7 @@ todoRoutes.route("/todo/done").delete((req, res) => {
 });
 
 /** Deletes a single todo. */
-todoRoutes.route("/todo/:id").delete((req, res) => {
+todoRoutes.route("/:id").delete((req, res) => {
   let db_connect = dbo.getDb(dbName);
   var myquery = { _id: ObjectId(req.params.id) };
   db_connect.collection(colName).deleteOne(myquery, function (err, result) {

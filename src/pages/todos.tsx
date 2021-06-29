@@ -18,7 +18,7 @@ const Todos = () => {
   useEffect(() => {
     // const fetchedTodos = service.load();
     // setTodos(fetchedTodos);
-    axios.get("http://localhost:5000/todo").then((res) => {
+    axios.get("http://localhost:5000/api/todos").then((res) => {
       setTodos(res.data);
     });
   }, []);
@@ -27,7 +27,7 @@ const Todos = () => {
   const addTodo = (event: React.FormEvent) => {
     event.preventDefault();
     axios
-      .post("http://localhost:5000/todo", {
+      .post("http://localhost:5000/api/todos", {
         text: input,
         done: false,
       })
@@ -47,7 +47,10 @@ const Todos = () => {
   /** Toggles todos between 'done' and 'not done' states. */
   const updateTodo = (_id: number, text: string, done: boolean) => {
     axios
-      .post("http://localhost:5000/todo/" + _id, { text: text, done: !done })
+      .post("http://localhost:5000/api/todos/" + _id, {
+        text: text,
+        done: !done,
+      })
       .then((res) => {
         // Update the todo client-side
         setTodos(
@@ -62,7 +65,7 @@ const Todos = () => {
   /** Deletes all 'done' todos. */
   const handleDeleteDone = () => {
     axios
-      .delete("http://localhost:5000/todo/done")
+      .delete("http://localhost:5000/api/todos/done")
       .then((res) => {
         // Update the todo list client-side
         setTodos(todos.filter((todo) => !todo.done));
