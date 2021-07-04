@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import SubHeading from "../core/SubHeading";
 
 interface PropsType {
+  title: string;
   status: string;
   setStatus: (status: string) => void;
 }
 
-const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
+const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
   const [timeLeft, setTimeLeft] = useState<Array<number>>([-1, -1, -1]);
   const [startTime, setStartTime] = useState<Array<number>>([0, 0, 5]);
   const [percentDone, setPercentDone] = useState<number>(0);
@@ -82,12 +84,12 @@ const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
     status === "ON"
       ? "bg-green-dark"
       : status === "PAUSED"
-      ? "bg-green-light"
+      ? "bg-orange"
       : "bg-yellow";
 
   return (
-    <div>
-      <div>Timer is {status}</div>
+    <div className="flex flex-col place-items-center">
+      <SubHeading text={title} />
       <div
         className={
           "w-72 py-4 text-7xl text-center rounded-3xl shadow-md " + bgColor
@@ -97,7 +99,10 @@ const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
         <div className="h-2 w-64 mx-auto mt-2 rounded-full overflow-hidden relative">
           <div className="w-full h-full bg-grey-light absolute"></div>
           <div
-            className="h-full bg-green-light absolute"
+            className={
+              "h-full absolute " +
+              (status === "PAUSED" ? "bg-grey" : "bg-green-light")
+            }
             style={{ width: percentDone + "%" }}
           ></div>
         </div>

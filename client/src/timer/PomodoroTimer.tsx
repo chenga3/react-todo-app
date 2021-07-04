@@ -70,14 +70,15 @@ const PomodoroTimer: React.FC = () => {
 
   return (
     <div>
-      <div>Pomodoro timer is in {status} mode</div>
       <div className="my-8 bg-yellow-light">
         <div className="flex flex-row space-x-16">
           <CountdownTimer
+            title="Work"
             status={workTimerStatus}
             setStatus={setWorkTimerStatus}
           />
           <CountdownTimer
+            title="Break"
             status={breakTimerStatus}
             setStatus={setBreakTimerStatus}
           />
