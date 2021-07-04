@@ -7,7 +7,8 @@ interface PropsType {
 
 const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
   const [timeLeft, setTimeLeft] = useState<Array<number>>([-1, -1, -1]);
-  const [startTime, setStartTime] = useState<Array<number>>([0, 0, 3]);
+  const [startTime, setStartTime] = useState<Array<number>>([0, 0, 5]);
+  const [percentDone, setPercentDone] = useState<number>(0);
 
   /** Sets timer status to ON */
   const startTimer = () => {
@@ -54,6 +55,14 @@ const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
       }
     }, 1000);
 
+    // Update percentDone state
+    setPercentDone(
+      100 -
+        ((timeLeft[0] * 3600 + timeLeft[1] * 60 + timeLeft[2]) /
+          (startTime[0] * 3600 + startTime[1] * 60 + startTime[2])) *
+          100
+    );
+
     return () => clearTimeout(timer); // Avoid overlapping timers
   }, [startTime, status, timeLeft]);
 
@@ -85,6 +94,13 @@ const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
         }
       >
         {timeLeft.join(":")}
+        <div className="h-2 w-64 mx-auto mt-2 rounded-full overflow-hidden relative">
+          <div className="w-full h-full bg-grey-light absolute"></div>
+          <div
+            className="h-full bg-green-light absolute"
+            style={{ width: percentDone + "%" }}
+          ></div>
+        </div>
       </div>
       <div>{startTime.join(":")}</div>
       {/* <button onClick={startTimer}>Start</button>
