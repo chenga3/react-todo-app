@@ -12,21 +12,6 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
   const [startTime, setStartTime] = useState<Array<number>>([0, 0, 5]);
   const [percentDone, setPercentDone] = useState<number>(0);
 
-  /** Sets timer status to ON */
-  const startTimer = () => {
-    setStatus("ON");
-  };
-
-  /** Sets timer status to PAUSED */
-  const pause = () => {
-    setStatus("PAUSED");
-  };
-
-  /** Sets timer status to OFF */
-  const reset = () => {
-    setStatus("OFF");
-  };
-
   useEffect(() => {
     /** Decrements time left */
     const countdown = () => {
@@ -108,9 +93,6 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
         </div>
       </div>
       <div>{startTime.join(":")}</div>
-      {/* <button onClick={startTimer}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={reset}>Reset</button> */}
     </div>
   );
 };
