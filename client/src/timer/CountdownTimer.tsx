@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProgressBar from "../core/ProgressBar";
 import SubHeading from "../core/SubHeading";
+import TimerDisplay from "./TimerDisplay";
 
 interface PropsType {
   title: string;
@@ -76,12 +77,13 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
   return (
     <div className="flex flex-col place-items-center">
       <SubHeading text={title} />
-      <div
-        className={
-          "w-72 py-4 text-7xl text-center rounded-3xl shadow-md " + bgColor
-        }
-      >
-        {timeLeft.join(":")}
+      <div className={"w-72 py-4 rounded-3xl shadow-md " + bgColor}>
+        <TimerDisplay
+          on={!(status === "OFF")}
+          setStartTime={setStartTime}
+          startTime={startTime}
+          timeLeft={timeLeft}
+        />
         <ProgressBar
           fillColor={status === "PAUSED" ? "bg-grey" : "bg-green-light"}
           percentDone={percentDone}
