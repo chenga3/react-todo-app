@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import SubHeading from "../core/SubHeading";
 
 interface PropsType {
+  title: string;
   status: string;
   setStatus: (status: string) => void;
 }
 
-const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
+const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
   const [timeLeft, setTimeLeft] = useState<Array<number>>([-1, -1, -1]);
-  const [startTime, setStartTime] = useState<Array<number>>([0, 0, 3]);
+  const [startTime, setStartTime] = useState<Array<number>>([0, 0, 5]);
+  const [percentDone, setPercentDone] = useState<number>(0);
 
   /** Sets timer status to ON */
   const startTimer = () => {
@@ -54,6 +57,14 @@ const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
       }
     }, 1000);
 
+    // Update percentDone state
+    setPercentDone(
+      100 -
+        ((timeLeft[0] * 3600 + timeLeft[1] * 60 + timeLeft[2]) /
+          (startTime[0] * 3600 + startTime[1] * 60 + startTime[2])) *
+          100
+    );
+
     return () => clearTimeout(timer); // Avoid overlapping timers
   }, [startTime, status, timeLeft]);
 
@@ -73,18 +84,28 @@ const CountdownTimer: React.FC<PropsType> = ({ status, setStatus }) => {
     status === "ON"
       ? "bg-green-dark"
       : status === "PAUSED"
-      ? "bg-green-light"
+      ? "bg-orange"
       : "bg-yellow";
 
   return (
-    <div>
-      <div>Timer is {status}</div>
+    <div className="flex flex-col place-items-center">
+      <SubHeading text={title} />
       <div
         className={
           "w-72 py-4 text-7xl text-center rounded-3xl shadow-md " + bgColor
         }
       >
         {timeLeft.join(":")}
+        <div className="h-2 w-64 mx-auto mt-2 rounded-full overflow-hidden relative">
+          <div className="w-full h-full bg-grey-light absolute"></div>
+          <div
+            className={
+              "h-full absolute " +
+              (status === "PAUSED" ? "bg-grey" : "bg-green-light")
+            }
+            style={{ width: percentDone + "%" }}
+          ></div>
+        </div>
       </div>
       <div>{startTime.join(":")}</div>
       {/* <button onClick={startTimer}>Start</button>
