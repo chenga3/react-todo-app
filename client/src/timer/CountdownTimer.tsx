@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ProgressBar from "../core/ProgressBar";
 import SubHeading from "../core/SubHeading";
 
 interface PropsType {
@@ -81,16 +82,10 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
         }
       >
         {timeLeft.join(":")}
-        <div className="h-2 w-64 mx-auto mt-2 rounded-full overflow-hidden relative">
-          <div className="w-full h-full bg-grey-light absolute"></div>
-          <div
-            className={
-              "h-full absolute " +
-              (status === "PAUSED" ? "bg-grey" : "bg-green-light")
-            }
-            style={{ width: percentDone + "%" }}
-          ></div>
-        </div>
+        <ProgressBar
+          fillColor={status === "PAUSED" ? "bg-grey" : "bg-green-light"}
+          percentDone={percentDone}
+        />
       </div>
       <div>{startTime.join(":")}</div>
     </div>
