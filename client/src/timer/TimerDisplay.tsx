@@ -46,58 +46,57 @@ const TimerDisplay: React.FC<Props> = ({
       setStartTime(newTime);
     }
   };
-
-  if (on) {
-    return (
-      <div className="flex flex-row text-7xl">
-        <Digit digit={Math.floor(timeLeft[0] / 10)} />
-        <Digit digit={timeLeft[0] % 10} />
-        <div>:</div>
-        <Digit digit={Math.floor(timeLeft[1] / 10)} />
-        <Digit digit={timeLeft[1] % 10} />
-        <div>:</div>
-        <Digit digit={Math.floor(timeLeft[2] / 10)} />
-        <Digit digit={timeLeft[2] % 10} />
-      </div>
-    );
-  } else {
-    return (
-      <div className="flex flex-row place-items-center text-7xl">
-        <Controller
-          digit={Math.floor(startTime[0] / 10)}
-          addTime={() => addTen(0)}
-          removeTime={() => removeTen(0)}
-        />
-        <Controller
-          digit={startTime[0] % 10}
-          addTime={() => addOne(0)}
-          removeTime={() => removeOne(0)}
-        />
-        <div>:</div>
-        <Controller
-          digit={Math.floor(startTime[1] / 10)}
-          addTime={() => addTen(1)}
-          removeTime={() => removeTen(1)}
-        />
-        <Controller
-          digit={startTime[1] % 10}
-          addTime={() => addOne(1)}
-          removeTime={() => removeOne(1)}
-        />
-        <div>:</div>
-        <Controller
-          digit={Math.floor(startTime[2] / 10)}
-          addTime={() => addTen(2)}
-          removeTime={() => removeTen(2)}
-        />
-        <Controller
-          digit={startTime[2] % 10}
-          addTime={() => addOne(2)}
-          removeTime={() => removeOne(2)}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      {on ? (
+        <div className="ml-4 flex flex-row space-x-0.5 place-items-center text-7xl">
+          <Digit digit={Math.floor(timeLeft[0] / 10)} />
+          <Digit digit={timeLeft[0] % 10} />
+          <div>:</div>
+          <Digit digit={Math.floor(timeLeft[1] / 10)} />
+          <Digit digit={timeLeft[1] % 10} />
+          <div>:</div>
+          <Digit digit={Math.floor(timeLeft[2] / 10)} />
+          <Digit digit={timeLeft[2] % 10} />
+        </div>
+      ) : (
+        <div className="ml-4 flex flex-row space-x-0.5 place-items-center text-7xl">
+          <Controller
+            digit={Math.floor(startTime[0] / 10)}
+            addTime={() => addTen(0)}
+            removeTime={() => removeTen(0)}
+          />
+          <Controller
+            digit={startTime[0] % 10}
+            addTime={() => addOne(0)}
+            removeTime={() => removeOne(0)}
+          />
+          <div className="mb-4">:</div>
+          <Controller
+            digit={Math.floor(startTime[1] / 10)}
+            addTime={() => addTen(1)}
+            removeTime={() => removeTen(1)}
+          />
+          <Controller
+            digit={startTime[1] % 10}
+            addTime={() => addOne(1)}
+            removeTime={() => removeOne(1)}
+          />
+          <div className="mb-4">:</div>
+          <Controller
+            digit={Math.floor(startTime[2] / 10)}
+            addTime={() => addTen(2)}
+            removeTime={() => removeTen(2)}
+          />
+          <Controller
+            digit={startTime[2] % 10}
+            addTime={() => addOne(2)}
+            removeTime={() => removeOne(2)}
+          />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default TimerDisplay;

@@ -1,8 +1,6 @@
 import React from "react";
-
-import UpController from "./UpController";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import Digit from "./Digit";
-import DownController from "./DownController";
 
 interface PropsTypes {
   digit: number;
@@ -13,9 +11,12 @@ interface PropsTypes {
 const Controller: React.FC<PropsTypes> = ({ digit, addTime, removeTime }) => {
   return (
     <div>
-      <UpController addTime={addTime} />
+      <BsChevronUp onClick={addTime} className="w-10 h-10 cursor-pointer" />
       <Digit digit={digit} />
-      <DownController removeTime={removeTime} />
+      <BsChevronDown
+        onClick={removeTime}
+        className="mt-1 w-10 h-10 cursor-pointer"
+      />
     </div>
   );
 };

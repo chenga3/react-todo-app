@@ -77,7 +77,7 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
   return (
     <div className="flex flex-col place-items-center">
       <SubHeading text={title} />
-      <div className={"w-72 py-4 rounded-3xl shadow-md " + bgColor}>
+      <div className={"w-80 py-4 rounded-3xl shadow-md " + bgColor}>
         <TimerDisplay
           on={!(status === "OFF")}
           setStartTime={setStartTime}
@@ -89,7 +89,6 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
           percentDone={percentDone}
         />
       </div>
-      <div>{startTime.join(":")}</div>
     </div>
   );
 };
