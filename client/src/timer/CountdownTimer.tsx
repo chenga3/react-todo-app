@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import ProgressBar from "../core/ProgressBar";
 import SubHeading from "../core/SubHeading";
+import TimerDisplay from "./TimerDisplay";
 
 interface PropsType {
   title: string;
@@ -11,21 +13,6 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
   const [timeLeft, setTimeLeft] = useState<Array<number>>([-1, -1, -1]);
   const [startTime, setStartTime] = useState<Array<number>>([0, 0, 5]);
   const [percentDone, setPercentDone] = useState<number>(0);
-
-  /** Sets timer status to ON */
-  const startTimer = () => {
-    setStatus("ON");
-  };
-
-  /** Sets timer status to PAUSED */
-  const pause = () => {
-    setStatus("PAUSED");
-  };
-
-  /** Sets timer status to OFF */
-  const reset = () => {
-    setStatus("OFF");
-  };
 
   useEffect(() => {
     /** Decrements time left */
@@ -90,27 +77,18 @@ const CountdownTimer: React.FC<PropsType> = ({ title, status, setStatus }) => {
   return (
     <div className="flex flex-col place-items-center">
       <SubHeading text={title} />
-      <div
-        className={
-          "w-72 py-4 text-7xl text-center rounded-3xl shadow-md " + bgColor
-        }
-      >
-        {timeLeft.join(":")}
-        <div className="h-2 w-64 mx-auto mt-2 rounded-full overflow-hidden relative">
-          <div className="w-full h-full bg-grey-light absolute"></div>
-          <div
-            className={
-              "h-full absolute " +
-              (status === "PAUSED" ? "bg-grey" : "bg-green-light")
-            }
-            style={{ width: percentDone + "%" }}
-          ></div>
-        </div>
+      <div className={"w-80 py-4 rounded-3xl shadow-md " + bgColor}>
+        <TimerDisplay
+          on={!(status === "OFF")}
+          setStartTime={setStartTime}
+          startTime={startTime}
+          timeLeft={timeLeft}
+        />
+        <ProgressBar
+          fillColor={status === "PAUSED" ? "bg-grey" : "bg-green-light"}
+          percentDone={percentDone}
+        />
       </div>
-      <div>{startTime.join(":")}</div>
-      {/* <button onClick={startTimer}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={reset}>Reset</button> */}
     </div>
   );
 };

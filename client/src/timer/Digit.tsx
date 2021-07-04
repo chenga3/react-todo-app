@@ -1,10 +1,10 @@
 import React from "react";
 
-interface PropsTypes {
+interface Props {
   digit: number;
 }
 
-const Digit: React.FC<PropsTypes> = ({ digit }) => {
+const Digit: React.FC<Props> = ({ digit }) => {
   return <div>{digit}</div>;
 };
 

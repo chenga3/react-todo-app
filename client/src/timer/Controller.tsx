@@ -1,27 +1,22 @@
-import React, { useState } from "react";
-
-import UpController from "./UpController";
+import React from "react";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import Digit from "./Digit";
-import DownController from "./DownController";
 
 interface PropsTypes {
-  cycle: string;
-  time: number;
-  placeValue: string;
+  digit: number;
+  addTime: () => void;
+  removeTime: () => void;
 }
 
-const Controller: React.FC<PropsTypes> = ({ cycle, time, placeValue }) => {
-  const [digit, setDigit] = useState<number>(0);
-
-  const addTime = () => {};
-
-  const removeTime = () => {};
-
+const Controller: React.FC<PropsTypes> = ({ digit, addTime, removeTime }) => {
   return (
     <div>
-      <UpController addTime={addTime} />
+      <BsChevronUp onClick={addTime} className="w-10 h-10 cursor-pointer" />
       <Digit digit={digit} />
-      <DownController removeTime={removeTime} />
+      <BsChevronDown
+        onClick={removeTime}
+        className="mt-1 w-10 h-10 cursor-pointer"
+      />
     </div>
   );
 };
